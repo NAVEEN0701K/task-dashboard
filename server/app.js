@@ -11,9 +11,19 @@ const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const taskRoutes = require('./routes/taskRoutes');
 
-connectDB();
+// Database connection middleware
+const dbMiddleware = async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (err) {
+    next(err);
+  }
+};
 
 const app = express();
+
+app.use(dbMiddleware);
 
 app.use(helmet());
 app.use(cors({
