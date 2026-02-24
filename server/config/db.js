@@ -1,18 +1,36 @@
 ﻿const mongoose = require('mongoose');
 
-const connectDB = async () => {
-  try {
-    const conn = await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+// Cache the connection across serverless invocations
+let cached = global.mongoose;
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
 
-    console.log(`MongoDB Connected: ${conn.connection.host}`);
-  } catch (error) {
-    console.error('Database connection error:', error.message);
-    console.warn('\n⚠️ WARNING: Could not connect to local MongoDB. ⚠️\nPlease ensure MongoDB is installed and running on port 27017.\nFor demonstration purposes without MongoDB, you would need to mock the Mongoose models entirely, which is outside the scope of this architecture.\nExiting process...');
-    process.exit(1);
+const connectDB = async () => {
+  // Return cached connection if available
+  if (cached.conn) {
+    return cached.conn;
   }
+
+  if (!cached.promise) {
+    const opts = {
+      bufferCommands: false,
+    };
+    cached.promise = mongoose.connect(process.env.MONGODB_URI, opts).then((mongoose) => {
+      console.log('MongoDB Connected');
+      return mongoose;
+    });
+  }
+
+  try {
+    cached.conn = await cached.promise;
+  } catch (error) {
+    cached.promise = null;
+    console.error('Database connection error:', error.message);
+    throw error; // Let the caller handle the error (returns 500 to client)
+  }
+
+  return cached.conn;
 };
 
 module.exports = connectDB;

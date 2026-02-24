@@ -2,7 +2,7 @@
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-require('dotenv').config();
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/errorMiddleware');
@@ -16,7 +16,12 @@ connectDB();
 const app = express();
 
 app.use(helmet());
-app.use(cors());
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+  credentials: false,
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -35,7 +40,7 @@ app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'Server is running' });
 });
 
-const path = require('path');
+
 
 app.use(errorHandler);
 
