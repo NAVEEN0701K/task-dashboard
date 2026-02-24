@@ -42,29 +42,29 @@ A full-stack web application with JWT-based authentication and task management s
 
 ```
 scalable-auth-dashboard/
-â”œâ”€â”€ client/                 # Frontend (React + Tailwind)
-â”‚   â”œâ”€â”€ public/
-â”‚   â”œâ”€â”€ src/
-â”‚   â”‚   â”œâ”€â”€ components/     # Reusable components
-â”‚   â”‚   â”œâ”€â”€ pages/         # Page components
-â”‚   â”‚   â”œâ”€â”€ context/       # React context
-â”‚   â”‚   â”œâ”€â”€ services/      # API services
-â”‚   â”‚   â”œâ”€â”€ hooks/         # Custom hooks
-â”‚   â”‚   â”œâ”€â”€ utils/         # Utility functions
-â”‚   â”‚   â””â”€â”€ routes/        # Route components
-â”‚   â””â”€â”€ package.json
-â”œâ”€â”€ server/                 # Backend (Node + Express + MongoDB)
-â”‚   â”œâ”€â”€ config/            # Database configuration
-â”‚   â”œâ”€â”€ controllers/       # Route controllers
-â”‚   â”œâ”€â”€ models/             # Database models
-â”‚   â”œâ”€â”€ routes/            # API routes
-â”‚   â”œâ”€â”€ middleware/        # Express middleware
-â”‚   â”œâ”€â”€ validators/        # Input validation
-â”‚   â”œâ”€â”€ utils/             # Utility functions
-â”‚   â”œâ”€â”€ app.js             # Express app configuration
-â”‚   â”œâ”€â”€ server.js          # Server entry point
-â”‚   â””â”€â”€ package.json
-â””â”€â”€ README.md
+|-- client/                 # Frontend (React + Tailwind)
+|   |-- public/
+|   |-- src/
+|   |   |-- components/     # Reusable components
+|   |   |-- pages/         # Page components
+|   |   |-- context/       # React context
+|   |   |-- services/      # API services
+|   |   |-- hooks/         # Custom hooks
+|   |   |-- utils/         # Utility functions
+|   |   |-- routes/        # Route components
+|   |   +-- package.json
+|-- server/                 # Backend (Node + Express + MongoDB)
+|   |-- config/            # Database configuration
+|   |-- controllers/       # Route controllers
+|   |-- models/             # Database models
+|   |-- routes/            # API routes
+|   |-- middleware/        # Express middleware
+|   |-- validators/        # Input validation
+|   |-- utils/             # Utility functions
+|   |-- app.js             # Express app configuration
+|   |-- server.js          # Server entry point
+|   +-- package.json
++-- README.md
 ```
 
 ## Getting Started
