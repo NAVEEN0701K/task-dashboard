@@ -1,8 +1,0 @@
-{
-    "name": "scalable-auth-dashboard",
-    "version": "1.0.0",
-    "scripts": {
-        "install": "npm install --prefix server && npm install --prefix client",
-        "build": "npm run build --prefix client"
-    }
-}
