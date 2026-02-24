@@ -13,10 +13,16 @@ const connectDB = async () => {
   }
 
   if (!cached.promise) {
+    const mongodb_uri = process.env.MONGODB_URI;
+
+    if (!mongodb_uri) {
+      throw new Error('MONGODB_URI is not defined. Please add it to your environment variables (Vercel Dashboard -> Settings -> Environment Variables).');
+    }
+
     const opts = {
       bufferCommands: false,
     };
-    cached.promise = mongoose.connect(process.env.MONGODB_URI, opts).then((mongoose) => {
+    cached.promise = mongoose.connect(mongodb_uri, opts).then((mongoose) => {
       console.log('MongoDB Connected');
       return mongoose;
     });
